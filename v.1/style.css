@@ -1,0 +1,321 @@
+/* current version */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Roboto', sans-serif;
+    background-position: center;
+    background-size: cover;
+}
+
+main {
+    width: 50vmin;
+    height: 72vmin;
+    /* border: 2px solid black; */
+    border-radius: 10px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+    background-color: white;
+    position: relative;
+    overflow: hidden;
+}
+
+section {
+    width: 100%;
+    height: 100%;
+}
+
+h2 {
+    text-align: center;
+    margin: 2vh 0 1vh 0;
+}
+
+input {
+    margin: 1vh auto 1.5vh auto;
+    display: block;
+    width: 65%;
+    height: 30px;
+    border: 2px solid black;
+    text-align: center;
+    font-size: 1.2em;
+}
+
+input::selection {
+    background-color: rgb(255, 230, 0);
+}
+
+.button {
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 1vmin 5vmin;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    font-size: 1.2rem;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    margin: 1vmin auto 0 auto;
+}
+
+.button:hover {
+    background-color: rgb(255, 230, 0);
+    color: black;
+    border: none;
+}
+
+#container {
+    margin: 1.5vh auto 0 auto;
+    width: 70%;
+    height: 70%;
+    position: relative;
+}
+
+.cover-img {
+    width: 100%;
+    height: 80%;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+#img-background {
+    width:100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    background-image: url(./assets/imdb.jpg);
+    background-position: center;
+    background-size: cover;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+    rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+}
+
+.mySlides {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.img-size {
+    width: 100%;
+    height: 75%;
+}
+
+.mySlides>h3,
+.mySlides>p {
+    text-align: center;
+    margin-top: 0.5vmin;
+    font-size: 1em;
+}
+
+.prev,
+.next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    margin-top: -2vmin;
+    padding: 1.5vmin;
+    color: black;
+    font-weight: bold;
+    font-size: 1.2em;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+    display: none;
+}
+
+/* Position the "next button" to the right */
+.next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover,
+.next:hover {
+    background-color: rgb(255, 230, 0);
+}
+
+/*Second Card*/
+#section-2 {
+    background-image: url(./assets/background.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-blend-mode: lighten;
+    padding: 2vmin;
+}
+
+#section-2>header {
+    width: 100%;
+    height: 25%;
+    border-radius: 10px;
+    position: relative;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;}
+
+.header-white-bg {
+    width: 100%;
+    height: 100%;
+    margin: auto;
+    background-color: white;
+    border-radius: 10px;
+    opacity: 0.9;
+    position: absolute;
+    z-index: 1;
+}
+
+.navbar-container {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 5;
+}
+
+.navbar-container>h2 {
+    margin-top: 1vmin;
+}
+
+.card-container1 {
+    width: 100%;
+    height: 70%;
+    margin-top: 2vmin;
+    border-radius: 10px;
+    background-color: white;
+}
+
+.card-container2 {
+    width: 100%;
+    height: 100%;
+    background-image: url(./assets/popcorn1.png);
+    background-position-x: 10%;
+}
+
+.card-container3 {
+    width: 100%;
+    height: 100%;
+    background-image: url(./assets/popcorn.png);
+    background-position-x: 90%;
+    padding: 3vmin;
+}
+
+.card-container2,
+.card-container3 {
+    background-size: 13vmin;
+    background-position-y: 90%;
+    background-repeat: no-repeat;
+    border-radius: 10px;
+}
+
+.card-container3>button {
+    margin-top:6vmin;
+}
+
+.img-thumbnail {
+    width: 47%;
+    height: 65%;
+    display: inline-block;
+    
+}
+
+.img-thumbnail > img {
+    width: 100%;
+    height: 100%;
+}
+
+.card-text {
+    width: 47%;
+    height: 65%;
+    border: 2px solid black;
+    border-radius: 5px;
+    padding: 1vmin;
+    display: inline-block;
+    float: right;    
+}
+
+.card-text h3, .card-text p, .card-text>p> a {
+    text-align: center;
+    font-size: 0.9em;
+    font-family: 'Roboto', sans-serif;
+}
+
+.card-text p:nth-of-type(n+2) {
+    margin-top: 3vmin;
+}
+
+.card-text>p > a {
+    text-decoration: none;
+    color: black;
+    margin-top: 2vmin;
+}
+
+.card-text>p>a:hover {
+    color: rgb(255, 230, 0);
+}
+
+.img-height {
+    width: 100%;
+    height: 70%;
+}
+
+.hide {
+    display: none;
+}
+
+/*Artist's Profile*/
+
+.profile-container {
+    width: 75%;
+    height: 90%;
+    margin: 3vmin auto;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+    rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+}
+
+.profile-image {
+    width: 100%;
+    height: 60%;
+}
+
+.profile-image>img {
+    width: 100%;
+    height: 100%;
+}
+
+.profile-text {
+    width: 100%;
+}
+
+.profile-text h3, .profile-text p {
+    margin-top: 2vmin;
+    font-size: 1.1em;
+    font-family: 'Roboto', sans-serif;
+    text-align: center;
+}
+
+.profile-text p {
+    font-size: 1em;
+}
+
+.profile-container > button {
+    margin-top: 2vmin;
+}
