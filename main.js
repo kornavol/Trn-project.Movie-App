@@ -1,19 +1,68 @@
 /* curent version */
 
-let result;
-let fullName; /* contains a object of actors */
+import { movieExecutor, result, actBioExecutor,  fullName } from "./Components/then.js";
+import { movieReq, autocompURL } from "./Components/urlReguest.js";
+import initSec1 from "./Components/html.js";
 
-function more(index) {
+
+/* !! not Working!! */
+//import { options } from "./Components/urlReguest.js";
+
+/* initial statet must be 1 and not 0  becouse we coud'n go to the last slide from first (will be comparison with 0) */
+let slideIndex = 1;
+
+/*  Slider Next/previous controls */
+window.plusSlides = function(n) {
+    showSlides(slideIndex += n);
+    
+}
+
+
+
+/* Slider core */
+export function showSlides(n) {
+    let slides = document.getElementsByClassName("mySlides");
+     /* return to first slide */
+    if (n > slides.length) {
+        slideIndex = 1
+    }
+    /* return to the last  slide */
+    if (n < 1) {
+        slideIndex = slides.length
+    }
+    /* hide all slides */
+    for ( let i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+    }
+    /* locate a current positon */
+    slides[slideIndex - 1].style.display = "block";
+    console.log(slideIndex);
+    
+}
+
+
+/* ! To-Do: Describe */
+let input = document.getElementById("search");
+input.addEventListener("keyup", function (event) {
+    if (event.keyCode === 13) {
+        console.log(event.target.value)
+        event.preventDefault();
+        document.getElementById("search-btn").click();
+    }
+}); 
+
+
+
+
+/* action of event  */
+window.moreBtn = function(index) {
     document.getElementById('section-1').classList.add('hide');
-    console.log(result);
+   
   /* split a actor's name  */
-    let NamActor = result.d[index].s;
-    let NamActor2 = NamActor.split(", ");
-
-    console.log(NamActor2[0]);
-    console.log(typeof(NamActor2[0]));
+    let artsName = result.d[index].s;
+    let idArts = artsName.split(", ");
   
-    /* !! WHY I NEED TO WRAP A ${NamActor2[0]} INTO quotation mark */
+    /* !! WHY I NEED TO WRAP A ${idArts[0]} INTO quotation mark */
     let card2 = `
     
             <header>
@@ -37,193 +86,104 @@ function more(index) {
                             <p>Rank: ${result.d[index].rank}</p>
                             <p>Genre: ${result.d[index].q}</p>
                             <p>Actors<br>
-                                <a onclick="dataReceiver('dataHandler1', '${NamActor2[0]}' )"  href="#">${NamActor2[0]}</a><br>
-                                <a onclick="dataReceiver('dataHandler1', '${NamActor2[1]}' )"  href="#">${NamActor2[1]}</a>
+                                <a onclick="dataReceiverBio('${idArts[0]}' )"  href="#">${idArts[0]}</a><br>
+                                <a onclick="dataReceiverBio('${idArts[1]}' )"  href="#">${idArts[1]}</a>
                             </p>
                         </div>
-                        <button class="button" onclick="back()">Back</button>
+                        <button class="button" onclick="backBtn('section-1','section-2')">Back</button>
                     </div>
                 </div>
             </div>
     
         `
+    document.getElementById('section-2').innerHTML = card2;
+    document.getElementById('section-2').classList.remove('hide'); 
+}
 
-        document.getElementById('section-2').innerHTML = card2;
-    
-        document.getElementById('section-2').classList.remove('hide'); 
-
-        //dataReceiver('dataHandler1')
+/* action of event  */
+window.backBtn = function (firstSection, secondSection) {
+    document.getElementById(firstSection).classList.remove('hide')
+    document.getElementById(secondSection).classList.add('hide')
 
 }
 
-function back() {
-    document.getElementById('section-1').classList.remove('hide')
-    document.getElementById('section-2').classList.add('hide')
-
+window.resetSection1 = function() {
+    document.getElementById('section-1').innerHTML = initSec1; 
 }
 
-function back2() {
-    document.getElementById('section-2').classList.remove('hide')
-    document.getElementById('section-3').classList.add('hide')
+/* !!!ASK BUELENT!!! 
+Idea is  use one function as universal request
+*/
 
-}
+/* 
+window.dataReceiver = function(handelrF) { 
 
-
-let input = document.getElementById("search");
-input.addEventListener("keyup", function (event) {
-    if (event.keyCode === 13) {
-        console.log(event.target.value)
-        event.preventDefault();
-        document.getElementById("search-btn").click();
-    }
-});
-
-dataReceiver = function (handelrF,artistName) { /* how to fix an module structure */
-    console.log(handelrF);
-    console.log(typeof(handelrF));
-
-    console.log(artistName);
-    console.log(typeof(artistName));
     
-    if (handelrF == 'dataHandler') { /* request for check a movie */
-    
-       handelrF =  async function dataHandler(data) {
-            result = await data.json();
-            console.log(result);
-             
-            let card = '';
-
-            for (let index = 0; index < result.d.length; index++) {
-                const movie = result.d[index];
-
-                    card += `
-                <div class="mySlides">
-                    <img id="img-mySlides${index}" class="img-size" src= "${movie.i.imageUrl}">
-                    <h3 id="h3-title">${movie.l}</h3>
-                    <p>(${movie.y})</p>
-                    <button id="search-btn" class="button" onclick="more(${index})">More</button>
-                </div>
-                `
-                    
-                    document.getElementById('container').innerHTML = card;
-                    document.getElementById("btn-prev").style.display = 'block'
-                    document.getElementById("btn-next").style.display = 'block'
-                    
-                    if(movie.l.length > 40) {
-                    document.getElementById(`img-mySlides${index}`).classList.remove('img-size');
-                    document.getElementById(`img-mySlides${index}`).classList.add('img-height');
-                   
-                }
-            }
-            
-            showSlides();
+     let options = {
+        "method": "GET",
+        "headers": {
+            "x-rapidapi-key": "2b06625579msha747fd5993d3d79p14985bjsn68d49cf7575f",
+            "x-rapidapi-host": "imdb8.p.rapidapi.com"
         }
+    };
 
-    } else if (handelrF == 'dataHandler1') { /* request for get a name */
-       handelrF =  async function(data) {
-            fullName  = await data.json();
-            console.log(fullName);
+   
+    let url = "https://imdb8.p.rapidapi.com/title/auto-complete?q=" + document.getElementById('search').value;
+    console.log(url);
+    
+      fetch(url, options).then(handelrF)
 
-            let name = fullName.d[0].id;
-             console.log(name);
-                nameHandler (name);
-                //(name) => {}
-        }  
+  
+} */
+
+/* action of event  */
+window.dataReceiverM = function() { 
+
+    const options = {
+        "method": "GET",
+        "headers": {
+            "x-rapidapi-key": "2b06625579msha747fd5993d3d79p14985bjsn68d49cf7575f",
+            "x-rapidapi-host": "imdb8.p.rapidapi.com"
+        }
+    }; 
+   
+    let url = autocompURL + document.getElementById('search').value;
+    
+    /* !!! ASK Buelent. Why  it's now working as imported varibles */
+    console.log(movieReq);
+    console.log(document.getElementById('search'));
+    console.log(document.getElementById('search').value);
+    
+    
+    function errorHandler(err) {
+        console.log(err)
     }
+
+    fetch(url, options).then(movieExecutor).catch(errorHandler);
+   
+}
+
+
+/* action of event  */
+window.dataReceiverBio = function(id) { 
+
+    const options = {
+        "method": "GET",
+        "headers": {
+            "x-rapidapi-key": "2b06625579msha747fd5993d3d79p14985bjsn68d49cf7575f",
+            "x-rapidapi-host": "imdb8.p.rapidapi.com"
+        }
+    }; 
+   
+
+    let url = autocompURL + id;
+    
 
     function errorHandler(err) {
         console.log(err)
     }
 
-    let url;
-    
-    if (typeof(artistName) == 'undefined') {
-
-       url = "https://imdb8.p.rapidapi.com/title/auto-complete?q=" + document.getElementById('search').value;
-       console.log(url);
-
-     } else if (artistName !== 'undefined') {
-       url = "https://imdb8.p.rapidapi.com/title/auto-complete?q=" + artistName;
-       console.log(url);
-
-    } 
-    
-    let options = {
-        "method": "GET",
-        "headers": {
-            "x-rapidapi-key": "2b06625579msha747fd5993d3d79p14985bjsn68d49cf7575f",
-            "x-rapidapi-host": "imdb8.p.rapidapi.com"
-        }
-    };
-
-
-    fetch(url, options).then(handelrF).catch(errorHandler);
-    
+    fetch(url, options).then(actBioExecutor).catch(errorHandler);
+   
 }
 
-
-
-let slideIndex = 1;
-showSlides(slideIndex);
-
-// Next/previous controls
-function plusSlides(n) {
-    showSlides(slideIndex += n);
-}
-
-function showSlides(n) {
-    let i;
-    let slides = document.getElementsByClassName("mySlides");
-
-    if (n > slides.length) {
-        slideIndex = 1
-    }
-    if (n < 1) {
-        slideIndex = slides.length
-    }
-    for (i = 0; i < slides.length; i++) {
-        slides[i].style.display = "none";
-    }
-
-    slides[slideIndex - 1].style.display = "block";
-}
-
-
-function nameHandler (name) { /* fetch to get information about artist and put into DOM */
-
-    async function process(data) {
-            let result1 = await data.json();
-            console.log(result1);
-            //console.log(result1.image.url);
-            document.getElementById('section-2').classList.add('hide');
-            let card3 = `
-            <div class="profile-container">
-            <div class="profile-image">
-                <img src="${result1.image.url}" alt="">
-            </div>
-            <div class="profile-text">
-                <h3>${result1.name}</h3>
-                <p>Birth Date: ${result1.birthDate}</p>
-                <p>Birth Place: ${result1.birthPlace}</p>
-                <p>Real name: ${result1.realName}</p>
-            </div>
-            <button class="button" onclick="back2()">Back</button>
-    </div>`
-            document.getElementById('section-3').innerHTML = card3;  
-            document.getElementById('section-3').classList.remove('hide');
-            console.log(result1.name);
-        }
-
-
-    let url = "https://imdb8.p.rapidapi.com/actors/get-bio?nconst="+name 
-    let options = {
-        "method": "GET",
-        "headers": {
-            "x-rapidapi-key": "2b06625579msha747fd5993d3d79p14985bjsn68d49cf7575f",
-            "x-rapidapi-host": "imdb8.p.rapidapi.com"
-        }
-    };
-
-    fetch(url, options).then(process).catch();
-    console.log(url);
-}

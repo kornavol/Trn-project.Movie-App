@@ -1,7 +1,9 @@
+Link:
+<https://kornavol.github.io/Trn-project.Movie-App/>.
+
 # Version features
 
-- A method was declared in the function how we can use the same selection with different parameters of all of them.
-! Note: not recommend;
+- Fixed bug if you type a artist name in a search fild. Now you are geting a bio.
 
 # To-do
 

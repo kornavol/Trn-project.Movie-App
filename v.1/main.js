@@ -140,7 +140,7 @@ dataReceiver = function (handelrF,artistName) { /* how to fix an module structur
     if (typeof(artistName) == 'undefined') {
 
        url = "https://imdb8.p.rapidapi.com/title/auto-complete?q=" + document.getElementById('search').value;
-       console.log(url);
+       console.log(document.getElementById('search').value);
 
      } else if (artistName !== 'undefined') {
        url = "https://imdb8.p.rapidapi.com/title/auto-complete?q=" + artistName;
@@ -164,7 +164,8 @@ dataReceiver = function (handelrF,artistName) { /* how to fix an module structur
 
 
 let slideIndex = 1;
-showSlides(slideIndex);
+
+//showSlides(slideIndex);
 
 // Next/previous controls
 function plusSlides(n) {
@@ -186,6 +187,7 @@ function showSlides(n) {
     }
 
     slides[slideIndex - 1].style.display = "block";
+    console.log(slideIndex);
 }
 
 
