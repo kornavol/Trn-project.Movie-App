@@ -19,4 +19,4 @@ let initSec1 =     `
 <a id="btn-next" class="next" onclick="plusSlides(1)">&#10095;</a>
 `
 
-export default initSec1;
+//export default initSec1;

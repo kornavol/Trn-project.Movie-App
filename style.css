@@ -1,5 +1,3 @@
-/* current version */
-
 * {
     margin: 0;
     padding: 0;
@@ -19,13 +17,13 @@ body {
 
 main {
     width: 50vmin;
-    height: 72vmin;
+    height: 80vmin;
     /* border: 2px solid black; */
     border-radius: 10px;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
     background-color: white;
-    position: relative;
     overflow: hidden;
+    position: relative;
 }
 
 section {
@@ -33,67 +31,78 @@ section {
     height: 100%;
 }
 
+#section-1 > header {
+    width: 100%;
+    height: 25%;
+    background-color: black;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    color: white;
+    padding: 2vmin;
+}
+
 h2 {
     text-align: center;
-    margin: 2vh 0 1vh 0;
 }
 
 input {
-    margin: 1vh auto 1.5vh auto;
+    margin: 1.5vh auto 2vh auto;
     display: block;
     width: 65%;
     height: 30px;
-    border: 2px solid black;
+    border: 1px solid white;
     text-align: center;
-    font-size: 1.2em;
+    font-size: 2vmin;
 }
 
 input::selection {
-    background-color: rgb(255, 230, 0);
+    background-color: #f3ce13;
 }
 
 .button {
-    background-color: black;
-    color: white;
+    background-color: #f3ce13;
+    color: black;
     border: none;
     border-radius: 5px;
     padding: 1vmin 5vmin;
     text-align: center;
     text-decoration: none;
     display: block;
-    font-size: 1.2rem;
+    font-size: 2.2vmin;
     transition-duration: 0.4s;
     cursor: pointer;
-    margin: 1vmin auto 0 auto;
+    margin: auto;
 }
 
 .button:hover {
-    background-color: rgb(255, 230, 0);
-    color: black;
-    border: none;
+    background-color: black;
+    color:white;
+    border:1px solid white;
+    
 }
 
-#container {
-    margin: 1.5vh auto 0 auto;
-    width: 70%;
-    height: 70%;
+#container-1, #container-2, #container-3 {
+    margin: auto;
+    width: 100%;
+    height: 75%;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
     position: relative;
 }
 
 .cover-img {
     width: 100%;
-    height: 80%;
-    margin: 0;
-    position: absolute;
-    top: 50%;
-    -ms-transform: translateY(-50%);
-    transform: translateY(-50%);
+    height: 100%;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 #img-background {
-    width:100%;
-    height: 100%;
-    position: relative;
+    width: 70%;
+    height: 75%;
     overflow: hidden;
     background-image: url(./assets/imdb.jpg);
     background-position: center;
@@ -102,24 +111,125 @@ input::selection {
     rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
 }
 
-.mySlides {
+/*Second Card*/
+/*Slides*/
+.mySlides, .card-container1 {
     width: 100%;
     height: 100%;
     position: relative;
     overflow: hidden;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
 }
 
-.img-size {
+.gallery-container {
+    width: 70%;
+    height: 75%;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.gallery-container>img {
+    height: 100%;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+    rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+    transition: 0.3s;
+}
+
+.gallery-container>img:hover {
+    opacity:  0.7;
+}
+
+/*Modal*/
+.modal {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
+    padding-top: 100px;
+    /* Location of the box */
+    left: 0;
+    top: 0;
     width: 100%;
-   height: 75%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.9);
+    /* Black w/ opacity */
 }
 
-.mySlides>h3,
-.mySlides>p {
-    text-align: center;
-    margin-top: 0.5vmin;
-    font-size: 1em;
+/* Modal Content (image) */
+.modal-content {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
 }
+
+/* Add Animation */
+.modal-content,
+#caption {
+    -webkit-animation-name: zoom;
+    -webkit-animation-duration: 0.6s;
+    animation-name: zoom;
+    animation-duration: 0.6s;
+}
+
+@-webkit-keyframes zoom {
+    from {
+        -webkit-transform: scale(0)
+    }
+
+    to {
+        -webkit-transform: scale(1)
+    }
+}
+
+@keyframes zoom {
+    from {
+        transform: scale(0)
+    }
+
+    to {
+        transform: scale(1)
+    }
+}
+
+/* The Close Button */
+.close {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.close:hover,
+.close:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* 100% Image Width on Smaller Screens */
+@media only screen and (max-width: 700px) {
+    .modal-content {
+        width: 100%;
+    }
+}
+
+/*Side buttons*/
 
 .prev,
 .next {
@@ -150,110 +260,86 @@ input::selection {
     background-color: rgb(255, 230, 0);
 }
 
-/*Second Card*/
-#section-2 {
-    background-image: url(./assets/background.jpg);
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-blend-mode: lighten;
-    padding: 2vmin;
-}
-
-#section-2>header {
+.footer {
     width: 100%;
     height: 25%;
-    border-radius: 10px;
-    position: relative;
-    margin: auto;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;}
-
-.header-white-bg {
-    width: 100%;
-    height: 100%;
-    margin: auto;
-    background-color: white;
-    border-radius: 10px;
-    opacity: 0.9;
-    position: absolute;
-    z-index: 1;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-top: 1px solid black;
+    background-color: black;
+    color: white;
 }
 
-.navbar-container {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    z-index: 5;
+.footer> h3, .footer >p {
+    text-align: center;
 }
 
-.navbar-container>h2 {
-    margin-top: 1vmin;
+.footer > h3 {
+    margin-top: 1vmin
 }
+
+.footer p {
+    margin-bottom: 1vmin;
+}
+
 
 .card-container1 {
-    width: 100%;
-    height: 70%;
-    margin-top: 2vmin;
-    border-radius: 10px;
     background-color: white;
 }
 
 .card-container2 {
     width: 100%;
-    height: 100%;
-    background-image: url(./assets/popcorn1.png);
-    background-position-x: 10%;
+    height: 75%;
+    position: relative;
+}
+.details-title {
+    position: absolute;
+    text-align: center;
+    margin-top: 2vmin;
+    width: 100%;
 }
 
-.card-container3 {
+.details-container {
     width: 100%;
     height: 100%;
-    background-image: url(./assets/popcorn.png);
-    background-position-x: 90%;
-    padding: 3vmin;
-}
-
-.card-container2,
-.card-container3 {
-    background-size: 13vmin;
-    background-position-y: 90%;
-    background-repeat: no-repeat;
-    border-radius: 10px;
-}
-
-.card-container3>button {
-    margin-top:6vmin;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
 }
 
 .img-thumbnail {
     width: 47%;
-    height: 65%;
-    display: inline-block;
-    
+    height: 70%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+    rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
 }
 
 .img-thumbnail > img {
-    width: 100%;
+    
     height: 100%;
+    
 }
 
 .card-text {
     width: 47%;
-    height: 65%;
-    border: 2px solid black;
-    border-radius: 5px;
+    height: 70%;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+    rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
     padding: 1vmin;
-    display: inline-block;
-    float: right;    
+    
 }
 
 .card-text h3, .card-text p, .card-text>p> a {
     text-align: center;
-    font-size: 0.9em;
+    font-size: 2vmin;
     font-family: 'Roboto', sans-serif;
+}
+
+.card-text h3 {
+    margin-top: 2vmin;
 }
 
 .card-text p:nth-of-type(n+2) {
@@ -270,10 +356,10 @@ input::selection {
     color: rgb(255, 230, 0);
 }
 
-.img-height {
-    width: 100%;
-    height: 70%;
+.card-container1>.footer>button {
+    margin-top: 4vmin;
 }
+
 
 .hide {
     display: none;
@@ -281,41 +367,107 @@ input::selection {
 
 /*Artist's Profile*/
 
+#section-2 {
+    background-image: url(./assets/imdb.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-blend-mode: lighten;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.black-bg {
+    width: 100%;
+    height: 15%;
+    top: 0;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    background-color: #f5de50;
+    position: absolute;
+    z-index: 1;
+}
+
 .profile-container {
     width: 75%;
     height: 90%;
-    margin: 3vmin auto;
     border-radius: 10px;
     overflow: hidden;
+    background-color: white;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+    rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+    position: absolute;
+    z-index: 5;
+}
+
+.profile-img-container {
+    width: 100%;
+    height: 55%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.profile-bg {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 1;
+    background-image: url(./Assets/blur-background.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    /* background-color: white; */
+}
+
+.profile-img {
+    height: 100%;
+    position: absolute;
+    z-index: 5;
+}
+
+.profile-img>img {
+    height: 100%;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
     rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
 }
 
-.profile-image {
+.profile-text-container {
     width: 100%;
-    height: 60%;
+    height: 45%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.profile-image>img {
-    width: 100%;
-    height: 100%;
+.text-border {
+    width: 90%;
+    height: 90%;
+    border: 5px solid rgb(77, 76, 76);
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+    rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+    border-radius: 5px;
 }
 
-.profile-text {
-    width: 100%;
-}
-
-.profile-text h3, .profile-text p {
-    margin-top: 2vmin;
-    font-size: 1.1em;
+.profile-text-container h3, .profile-text-container p {
+    margin-bottom: 2vmin;
+    font-size: 2vmin;
     font-family: 'Roboto', sans-serif;
     text-align: center;
 }
 
-.profile-text p {
-    font-size: 1em;
+.profile-text-container h3 {
+    margin-top: 2vmin;
 }
 
-.profile-container > button {
-    margin-top: 2vmin;
+.profile-text-container p {
+    font-size: 2vmin;
+}
+
+.text-border > button {
+    margin-top: 4vmin;
 }
