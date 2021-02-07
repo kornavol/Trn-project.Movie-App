@@ -11,3 +11,10 @@ Link:
 - describe logick;
 - create a separetly downloading of "actors fetch"
 - create a logick, where a each reguest will not be reapeat
+
+# Question to Buelent
+
+- the idea was create module structure, and call function otside (on page) wiht atribute which is also function. It's not working.
+
+  - onclick from button
+  - varible as container for .value
