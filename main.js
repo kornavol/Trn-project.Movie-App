@@ -1,7 +1,7 @@
 /* curent version */
 
 import { movieExecutor, result, actBioExecutor,  db } from "./Components/then.js";
-import { movieReq, autocompURL, options } from "./Components/urlReguest.js";
+import { input, autocompURL, options } from "./Components/dates.js";
 import {dbMovie, dbName} from "./Components/dbHandler.js";
 
 import test2 from "./Components/test2.js";
@@ -43,7 +43,7 @@ export function showSlides(n) {
 
 
 /* ! To-Do: Describe a logick */
-let input = document.getElementById("search");
+//let input = document.getElementById("search");
 input.addEventListener("keyup", function (event) {
     if (event.keyCode === 13) {
         event.preventDefault();
@@ -87,7 +87,7 @@ window.moreBtn = function(index) {
             </div>
             
             <div class="footer">
-                <button class="button" onclick="backBtn('container-2','container-3')">Back</button>  
+                <button class="button" onclick="backBtn('container-2','container-3', 'block')">Back</button>  
             </div>
             
         </div>
@@ -100,12 +100,15 @@ window.moreBtn = function(index) {
 }
 
 /* action of event  */
-window.backBtn = function (firstSection, secondSection) {
+window.backBtn = function (firstSection, secondSection, check) {
     document.getElementById(firstSection).classList.remove('hide');
     document.getElementById(secondSection).classList.add('hide');
-    document.getElementById("btn-prev").style.display = 'block';
-    document.getElementById("btn-next").style.display = 'block';
-
+    if (check == 'block') {
+        document.getElementById("btn-prev").style.display = 'block';
+        document.getElementById("btn-next").style.display = 'block';
+        
+    }
+    
 }
 
 /* action of event  */
@@ -122,7 +125,7 @@ window.dataReceiverM = function() {
         // } 
        
     for (const key in db) {
-        if (key == document.getElementById('search').value) {
+        if (key == input.value.toLowerCase()) {
             if (db[key].check == 'movie' ) { /* diferencess between key */
                 //alert('Get movie from db. Fixed')
                 dbMovie();
@@ -132,13 +135,13 @@ window.dataReceiverM = function() {
             }
         
         } else {
-            let url = autocompURL + document.getElementById('search').value;
+            let url = autocompURL + input.value;
             
             /*  We coudn't use a input value from varible which defined and imported. Becouse in this case we call this function once and value will be unupdated
             Actually. I didn't fully understand
             */
-            console.log(movieReq);
-            console.log(document.getElementById('search').value);
+            // console.log(movieReq.value);
+            // console.log(document.getElementById('search').value);
                         
             function errorHandler(err) {
                 console.log(err)
@@ -155,20 +158,13 @@ window.dataReceiverM = function() {
 window.dataReceiverBio = function(id) { 
 
     for (const key in db) {
-        if (key == document.getElementById('search').value) {
+        if (key == input.value.toLowerCase()) {
             if (db[key].check == 'bio') { 
                 dbName();
             } else if (db[key].check == 'movie') {
                 break
             }
         } else {
-            const options = {
-                "method": "GET",
-                "headers": {
-                    "x-rapidapi-key": "3059e7b3e6msh6194f2c6a42f5cfp11bdf3jsncb27126748f0",
-                    "x-rapidapi-host": "imdb8.p.rapidapi.com"
-                }
-            }
             let url = autocompURL + id;
 
             function errorHandler(err) {

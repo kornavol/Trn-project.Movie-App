@@ -2,19 +2,27 @@ Link to page:
 
 <https://kornavol.github.io/Trn-project.Movie-App/>.
 
-# Version features
+## Version features
 
-- Fixed bug if you type a artist name in a search fild. Now you are geting a bio.
-- Solved:  How add into object new paar key\varible if key it's a value of another varible
+- module structure
+- "Enter" works together with click on button;
+- image enlargement on click;
+- DB for happened requests;
+- repeated requests redirected to DB;
+- a request match with DB independently from letters size (upper-lower case)
 
-# To-do
+## To-do
 
-- add opportunity to upload db if you reach "bio" via movie reguest;
-- add cheker db for bio via "bio" via movie reguest;
 - create a structure, when we can use the same "request" function;
-- describe logick;
+- describe all js logick;
 
-# Question to Buelent
+## Bugs
+
+- we coudnt repeat the same customer "input's" request from db if it not comleted !!  Regarding only to bio. artists. It happans becouse save occurs with key from "name". For fixing need to create another 'saver' for customer "input's" request  
+
+## Question to Buelent
+
+  1. Explanation about scope im module structure
 
 - the idea was create module structure, and call function otside (on page) wiht atribute which is also function. It's not working.
 

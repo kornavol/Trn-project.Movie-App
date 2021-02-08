@@ -1,9 +1,10 @@
 import { db } from "./then.js";
-//import { showSlides } from "../main.js";
+import { showSlides } from "../main.js";
+import {input} from "./dates.js"
 
 export {dbMovie, dbName }
 
-/* We coudnt defined varibles globaky (regarding this scope\page), becouse this function execute in anothe scope (main.js) and varible WILL BE UNDEFINED */
+/* We coudnt defined varibles globaly (regarding this scope\page), becouse this function execute in anothe scope (main.js) and varible WILL BE UNDEFINED */
 
 // let key = document.getElementById('search').value;
 // let result = db[key];
@@ -12,7 +13,7 @@ export {dbMovie, dbName }
 function dbMovie() { 
         
     /* !!! they couldn't be defined globally */
-    let key = document.getElementById('search').value;
+    let key = input.value.toLowerCase();
     let result = db[key];
     let card = ''; 
    
@@ -58,9 +59,9 @@ function dbMovie() {
 
 function dbName () { 
 
-    let key = document.getElementById('search').value;
-    let result = db[key]; 
-
+    let key = input.value.toLowerCase();
+    let result = db[key];
+    
     console.log('dbName for  ' + key + '  is activ');
 
     let card3 = 

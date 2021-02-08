@@ -1,11 +1,10 @@
 //import showSlides from "./slider.js";
-//import {showSlides} from "../main.js";
+import {showSlides} from "../main.js";
+import { options, input } from "./dates.js";
 
-export {movieExecutor, actBioExecutor, result, fullName, db }
+export {movieExecutor, actBioExecutor, result, db }
 
 let result; /* contains a data set of movie */
-let fullName; /* contains a object of actors */
-
 let db = {test: "test"};
 
 
@@ -14,15 +13,18 @@ async function movieExecutor(data) {
    
    result = await data.json();
    /* !!! I coud't use as global varible in this js file */
-   let key = document.getElementById('search').value;
+   let key = input.value.toLowerCase();
    let gate1 = result.d[0].id;
    
    if (gate1.startsWith("nm")) {
-        let name = result.d[0].id;
+        let name = gate1;
         nameHandler (name);
     } else {
-        /* Add into object new paar key\varible if key it's a value of another varible */
+        /* Adding into object a cheker for comparison with db*/
         result.check = 'movie'
+        /* Adding into db new paar key\varible and saving a data from request into db.
+           the key will be value from customre requst 
+        */
         db[key] = result;
         console.log(db);
   
@@ -69,11 +71,11 @@ async function movieExecutor(data) {
 
 /* request for get id name */
 async function actBioExecutor(data) {
-    fullName  = await data.json();
+    let fullName  = await data.json();
+    console.log('actBioExecutor  ', fullName );
     let name = fullName.d[0].id;
     nameHandler (name);
-        //(name) => {}
-}  
+ }  
 
 /* fetch to get information about artist and put into DOM */
 function nameHandler (name) { 
@@ -82,13 +84,13 @@ function nameHandler (name) {
         document.getElementById('section-1').classList.add('hide');
 
         let result1 = await data.json();
-        let key = document.getElementById('search').value;
-        
+        let key = result1.name.toLowerCase();
+                
         /*TO-DO. add checker for db */
-        result.check = 'bio' 
-        db[key] = result1; 
-        
-
+        result1.check = 'bio' /* exacurting */
+        db[key] = result1;
+        console.log('db from nameHanler',  db);
+      
         let card3 = 
             `
                 <div class="black-bg"></div>
@@ -118,13 +120,6 @@ function nameHandler (name) {
 
 
     let url = "https://imdb8.p.rapidapi.com/actors/get-bio?nconst="+name 
-    let options = {
-        "method": "GET",
-        "headers": {
-            "x-rapidapi-key": "3059e7b3e6msh6194f2c6a42f5cfp11bdf3jsncb27126748f0",
-            "x-rapidapi-host": "imdb8.p.rapidapi.com"
-        }
-    };
 
     fetch(url, options).then(process).catch();
 }
