@@ -151,7 +151,8 @@ dataReceiver = function (handelrF,artistName) { /* how to fix an module structur
     let options = {
         "method": "GET",
         "headers": {
-            "x-rapidapi-key": "2b06625579msha747fd5993d3d79p14985bjsn68d49cf7575f",
+            
+            "x-rapidapi-key": "3059e7b3e6msh6194f2c6a42f5cfp11bdf3jsncb27126748f0",
             "x-rapidapi-host": "imdb8.p.rapidapi.com"
         }
     };
@@ -221,7 +222,7 @@ function nameHandler (name) { /* fetch to get information about artist and put i
     let options = {
         "method": "GET",
         "headers": {
-            "x-rapidapi-key": "2b06625579msha747fd5993d3d79p14985bjsn68d49cf7575f",
+            "x-rapidapi-key": "3059e7b3e6msh6194f2c6a42f5cfp11bdf3jsncb27126748f0",
             "x-rapidapi-host": "imdb8.p.rapidapi.com"
         }
     };

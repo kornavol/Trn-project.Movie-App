@@ -1,14 +1,14 @@
 /* curent version */
 
-import { movieExecutor, result, actBioExecutor,  fullName } from "./Components/then.js";
-import { movieReq, autocompURL } from "./Components/urlReguest.js";
+import { movieExecutor, result, actBioExecutor,  db } from "./Components/then.js";
+import { movieReq, autocompURL, options } from "./Components/urlReguest.js";
+import {dbMovie, dbName} from "./Components/dbHandler.js";
+
+import test2 from "./Components/test2.js";
 
 
 
-/* !! not Working!! */
-//import { options } from "./Components/urlReguest.js";
-
-/* initial statet must be 1 and not 0  becouse we coud'n go to the last slide from first (will be comparison with 0) */
+/* initial staet must be 1 and not 0  becouse we coud'n go to the last slide from first (will be comparison with 0) */
 let slideIndex = 1;
 
 /*  Slider Next/previous controls */
@@ -21,6 +21,8 @@ window.plusSlides = function(n) {
 
 /* Slider core */
 export function showSlides(n) {
+    console.log('the function showSlides is called ');
+
     let slides = document.getElementsByClassName("mySlides");
      /* return to first slide */
     if (n > slides.length) {
@@ -36,23 +38,18 @@ export function showSlides(n) {
     }
     /* locate a current positon */
     slides[slideIndex - 1].style.display = "block";
-    console.log(slideIndex);
-    
+
 }
 
 
-/* ! To-Do: Describe */
+/* ! To-Do: Describe a logick */
 let input = document.getElementById("search");
 input.addEventListener("keyup", function (event) {
     if (event.keyCode === 13) {
-        console.log(event.target.value)
         event.preventDefault();
         document.getElementById("search-btn").click();
     }
 }); 
-
-
-
 
 /* action of event  */
 window.moreBtn = function(index) {
@@ -96,7 +93,6 @@ window.moreBtn = function(index) {
         </div>
 
     `
-
     document.getElementById('container-3').innerHTML = card2;
     document.getElementById('container-3').classList.remove('hide');
     document.getElementById("btn-prev").style.display = 'none';
@@ -112,56 +108,45 @@ window.backBtn = function (firstSection, secondSection) {
 
 }
 
-
-/* !!!ASK BUELENT!!! 
-Idea is  use one function as universal request
-*/
-
-/* 
-window.dataReceiver = function(handelrF) { 
-
-    
-     let options = {
-        "method": "GET",
-        "headers": {
-            "x-rapidapi-key": "2b06625579msha747fd5993d3d79p14985bjsn68d49cf7575f",
-            "x-rapidapi-host": "imdb8.p.rapidapi.com"
-        }
-    };
-
-   
-    let url = "https://imdb8.p.rapidapi.com/title/auto-complete?q=" + document.getElementById('search').value;
-    console.log(url);
-    
-      fetch(url, options).then(handelrF)
-
-  
-} */
-
 /* action of event  */
 window.dataReceiverM = function() { 
+    /*  For call function into this scope paramatrecly we need:
+    * - we should call function (in HTML) with wraped in quatation mark. Exempel: ataReceiverM('test2') 
 
-    const options = {
-        "method": "GET",
-        "headers": {
-            "x-rapidapi-key": "3059e7b3e6msh6194f2c6a42f5cfp11bdf3jsncb27126748f0",
-            "x-rapidapi-host": "imdb8.p.rapidapi.com"
+    1. check the name (with "if")
+    2. to wrap imported function (what we going to use ) in new varible which has the same name
+    
+    */
+        // if (xyz == 'test2') {
+        //     xyz = test2;
+        // } 
+       
+    for (const key in db) {
+        if (key == document.getElementById('search').value) {
+            if (db[key].check == 'movie' ) { /* diferencess between key */
+                //alert('Get movie from db. Fixed')
+                dbMovie();
+            } else if (db[key].check == 'bio') {
+                //alert('Get bio from db')
+                dbName();
+            }
+        
+        } else {
+            let url = autocompURL + document.getElementById('search').value;
+            
+            /*  We coudn't use a input value from varible which defined and imported. Becouse in this case we call this function once and value will be unupdated
+            Actually. I didn't fully understand
+            */
+            console.log(movieReq);
+            console.log(document.getElementById('search').value);
+                        
+            function errorHandler(err) {
+                console.log(err)
+            }
+            
+            fetch(url, options).then(movieExecutor).catch(errorHandler);
         }
-    }; 
-   
-    let url = autocompURL + document.getElementById('search').value;
-    
-    /* !!! ASK Buelent. Why  it's now working as imported varibles */
-    console.log(movieReq);
-    console.log(document.getElementById('search'));
-    console.log(document.getElementById('search').value);
-    
-    
-    function errorHandler(err) {
-        console.log(err)
     }
-
-    fetch(url, options).then(movieExecutor).catch(errorHandler);
    
 }
 
@@ -169,33 +154,38 @@ window.dataReceiverM = function() {
 /* action of event  */
 window.dataReceiverBio = function(id) { 
 
-    const options = {
-        "method": "GET",
-        "headers": {
-            "x-rapidapi-key": "3059e7b3e6msh6194f2c6a42f5cfp11bdf3jsncb27126748f0",
-            "x-rapidapi-host": "imdb8.p.rapidapi.com"
+    for (const key in db) {
+        if (key == document.getElementById('search').value) {
+            if (db[key].check == 'bio') { 
+                dbName();
+            } else if (db[key].check == 'movie') {
+                break
+            }
+        } else {
+            const options = {
+                "method": "GET",
+                "headers": {
+                    "x-rapidapi-key": "3059e7b3e6msh6194f2c6a42f5cfp11bdf3jsncb27126748f0",
+                    "x-rapidapi-host": "imdb8.p.rapidapi.com"
+                }
+            }
+            let url = autocompURL + id;
+
+            function errorHandler(err) {
+                console.log(err)
+            }
+
+            fetch(url, options).then(actBioExecutor).catch(errorHandler);
         }
-    }; 
-   
-
-    let url = autocompURL + id;
-    
-
-    function errorHandler(err) {
-        console.log(err)
     }
-
-    fetch(url, options).then(actBioExecutor).catch(errorHandler);
-   
+    
 }
 
 /* Show a big picture of movie */
 window.modalPic =  function (index){
     let modal = document.getElementById(`myModal-${index}`);
-        console.log(modal);
     let img = document.getElementById(`img-mySlides-${index}`);
     let modalImg = document.getElementById(`img-${index}`);
-    console.log(img.src);
     modal.style.display = "block";
     modalImg.src = img.src; 
   

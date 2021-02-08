@@ -1,3 +1,4 @@
+/*  NOT USED */
 
 // WE couden't use a slider becouse we increase a slideIndex in main, and if we would be export from here, the varible will be only for read.
 
