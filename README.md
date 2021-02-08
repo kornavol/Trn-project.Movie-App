@@ -17,6 +17,7 @@ Link to api:
 
 - create a structure, when we can use the same "request" function;
 - describe all js logick;
+- recreate a slider function (Buelent method) and put it into new module
 
 ## Bugs
 
