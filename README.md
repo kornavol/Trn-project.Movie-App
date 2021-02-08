@@ -1,5 +1,5 @@
 Link to page:
-<https://kornavol.github.io/Trn-project.Movie-App/>.
+<https://kornavol.github.io/Trn-project.Movie-App/>
 
 Link to api:
 <https://rapidapi.com/apidojo/api/imdb8/endpoints>
